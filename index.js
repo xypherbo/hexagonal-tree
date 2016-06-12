@@ -13,6 +13,10 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+app.get('/:servicename',function(request,response){
+    response.render('services/'+request.param('servicename'));
+})
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
