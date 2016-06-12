@@ -13,7 +13,7 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/:servicename',function(request,response){
+app.get('/services/:servicename',function(request,response){
     response.render('services/'+request.param('servicename'));
 })
 
