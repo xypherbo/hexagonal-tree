@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Translate">
 <head>
   <% include ../partials/header.ejs %>
+  <script type="text/javascript" src="/service/test/controller.js"></script>
 </head>
 
-<body>
+<body ng-controller="TranslateController as THIS">
 
   <% include ../partials/nav.ejs %>
   <div class="container">
-      <form action="/process/test/test" method="POST">
-          <input name="test" type="text">
+      <form ng-submit="THIS.concat()" method="POST">
+          <input ng-model="input" name="test" type="text">
           <button type="submit">Translate</button>
       </form>
+      
+      <div class="row">
+          <div class="col-xs-12">
+              <h1>{{input}}</h1>
+          </div>
+      </div>
   </div>
 
 </div>
