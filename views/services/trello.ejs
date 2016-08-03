@@ -18,16 +18,15 @@
             <br>
             <div class="row">
                 <div class="col-xs-12">
-                    <button ng-click="test()">test</button>
-                    <form>
+                    <form  autocomplete="on">
                         <div class="form-group">
                             <label>Trello Key</label>
-                            <input class="form-control" type="text" ng-model="trelloKey" autocomplete="on"><br>
+                            <input class="form-control" name="key" type="text" ng-model="trelloKey" autocomplete="on"><br>
                             <a target="_blank" ng-disabled="!trelloKey" class="btn btn-info" ng-href="https://trello.com/1/authorize?key={{trelloKey}}&name=HexagonalTrello&expiration=never&response_type=token">Get Token</a>
                         </div>
                         <div class="form-group">
                             <label>Trello Token</label>
-                            <input class="form-control" type="text" ng-model="trelloToken"  autocomplete="on"><br>
+                            <input class="form-control" name="token" type="text" ng-model="trelloToken"  autocomplete="on"><br>
                             <button class="btn btn-info" ng-click="getBoard()">Get Board</button>
                         </div>
                         <div class="form-group">

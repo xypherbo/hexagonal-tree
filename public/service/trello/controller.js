@@ -1,5 +1,4 @@
 angular.module("Trello", [
-    'ngSanitize', 'ngCsv'
 ]).controller("TrelloController", function ($scope, $http) {
     console.log("Hello Angular");
 
@@ -147,10 +146,28 @@ angular.module("Trello", [
             //transform name
             retData.forEach(function (row) {
                 $scope.member.forEach(function (member) {
-                    if (member.username == row.username) {
+                    console.log(member);
+                    if (member.id == row.username) {
                         row.username = member.username;
                     }
                 });
+            });
+
+            //sort
+
+            retData.sort(function (a,b) {
+                var x = new Date(a.date).getTime();
+                var y = new Date(b.date).getTime();
+                if(x > y){
+                    return 1;
+                }
+
+                if(x<y){
+                    return -1;
+
+                }
+
+                return 0;
             });
             $scope.exportData = retData;
 
