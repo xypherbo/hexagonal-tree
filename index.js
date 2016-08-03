@@ -3,55 +3,39 @@ var app = express();
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/hexagonaltree');
+
+var dbURI = 'mongodb://root:123c56789@ds013414.mlab.com:13414/heroku_61dvgpt1';
+mongoose.connect(dbURI);
 
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-  console.log("mongodb connected at "+'mongodb://localhost/hexagonaltree');
+var schema = {};
+
+db.on('connected', function () {
+    console.log('Mongoose default connection open to ' + dbURI);
+
+    schema.test = require('./mongoschema/test.js');
+    
 });
 
-var movieSchema = new mongoose.Schema({
-  title: { type: String }
-, rating: String
-, releaseYear: Number
-, hasCreditCookie: Boolean
+// If the connection throws an error
+db.on('error', function (err) {
+    console.log('Mongoose default connection error: ' + err);
 });
 
-// Compile a 'Movie' model using the movieSchema as the structure.
-// Mongoose also creates a MongoDB collection called 'Movies' for these documents.
-var Movie = mongoose.model('Movie', movieSchema);
-
-var thor = new Movie({
-  title: 'Thor'
-, rating: 'PG-13'
-, releaseYear: '2011'  // Notice the use of a String rather than a Number - Mongoose will automatically convert this for us.
-, hasCreditCookie: true
+// When the connection is disconnected
+db.on('disconnected', function () {
+    console.log('Mongoose default connection disconnected');
 });
 
-thor.save(function(err, thor) {
-  if (err) return console.error(err);
-  console.dir(thor);
+// If the Node process ends, close the Mongoose connection
+process.on('SIGINT', function () {
+    db.close(function () {
+        console.log('Mongoose default connection disconnected through app termination');
+        process.exit(0);
+    });
 });
 
-// Find a single movie by name.
-Movie.findOne({ title: 'Thor' }, function(err, thor) {
-  if (err) return console.error(err);
-  console.dir(thor);
-});
 
-// Find all movies.
-Movie.find(function(err, movies) {
-  if (err) return console.error(err);
-  console.dir(movies);
-});
-
-// Find all movies that have a credit cookie.
-Movie.find({ hasCreditCookie: true }, function(err, movies) {
-  if (err) return console.error(err);
-  console.dir(movies);
-});
 
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies

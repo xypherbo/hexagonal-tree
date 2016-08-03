@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="Trello">
+
+<head>
+    <% include ../partials/header.ejs %>
+        <script type="text/javascript" src="/service/trello/controller.js"></script>
+</head>
+
+<body ng-controller="TrelloController as THIS">
+
+    <% include ../partials/nav.ejs %>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a target="_blank" href="https://trello.com/app-key">Get Trello Key</a>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button ng-click="test()">test</button>
+                    <form>
+                        <div class="form-group">
+                            <label>Trello Key</label>
+                            <input class="form-control" type="text" ng-model="trelloKey" autocomplete="on"><br>
+                            <a target="_blank" ng-disabled="!trelloKey" class="btn btn-info" ng-href="https://trello.com/1/authorize?key={{trelloKey}}&name=HexagonalTrello&expiration=never&response_type=token">Get Token</a>
+                        </div>
+                        <div class="form-group">
+                            <label>Trello Token</label>
+                            <input class="form-control" type="text" ng-model="trelloToken"  autocomplete="on"><br>
+                            <button class="btn btn-info" ng-click="getBoard()">Get Board</button>
+                        </div>
+                        <div class="form-group">
+                            <label>Board name (จะมีเฉพาะบอร์ดที่มาร์คดาวใว้)</label>
+                            <select class="form-control" ng-disabled="!boardList" ng-model="boardName" ng-change="getList()" ng-options="item.name for item in boardList">
+                                <option value="">เลือกบอร์ด</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>List name</label>
+                            <select class="form-control" ng-disabled="!listColumn" ng-model="doneListName" ng-options="item.name for item in listColumn">
+<option value="">เลือก Done List</option>
+                    </select>
+                        </div>
+                        <div class="form-group">
+                            <label>รีพอตเดือน</label>
+                            <select class="form-control" ng-model="month">
+                                <option value="1">1-มกรา</option>
+                                <option value="2">2-กุมภา</option>
+                                <option value="3">3-มีนา</option>
+                                <option value="4">4-เมษา</option>
+                                <option value="5">5-พฤษภา</option>
+                                <option value="6">6-มิถุนา</option>
+                                <option value="7">7-กรกฏา</option>
+                                <option value="8">8-สิงหา</option>
+                                <option value="9">9-กันยา</option>
+                                <option value="10">10-ตุลา</option>
+                                <option value="11">11-พฤศจิกา</option>
+                                <option value="12">12-ธันวา</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-success" ng-click="exports()">
+                        Export
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+</body>
+
+</html>
