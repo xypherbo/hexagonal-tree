@@ -11,13 +11,13 @@
     <% include ../partials/nav.ejs %>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-6">
                     <a target="_blank" href="https://trello.com/app-key">Get Trello Key</a>
                 </div>
             </div>
             <br>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-6">
                     <form  autocomplete="on">
                         <div class="form-group">
                             <label>Trello Key</label>
@@ -30,7 +30,7 @@
                             <button class="btn btn-info" ng-click="getBoard()">Get Board</button>
                         </div>
                         <div class="form-group">
-                            <label>Board name (จะมีเฉพาะบอร์ดที่มาร์คดาวใว้)</label>
+                            <label>Starred Board name (จะมีเฉพาะบอร์ดที่มาร์คดาวใว้)</label>
                             <select class="form-control" ng-disabled="!boardList" ng-model="boardName" ng-change="getList()" ng-options="item.name for item in boardList">
                                 <option value="">เลือกบอร์ด</option>
                             </select>
@@ -60,12 +60,15 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-xs-12 col-sm-6">    
+                    <img src="/images/Selection_018.png" alt="">
+                </div>
             </div>
             <br>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-6">
                     <button class="btn btn-success" ng-click="exports()">
-                        Export
+                        <i class="fa fa-search"></i> Export
                     </button>
                 </div>
             </div>
