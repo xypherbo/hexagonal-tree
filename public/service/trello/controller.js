@@ -63,9 +63,9 @@ angular.module("Trello", [
             var inMonthCards = [];
 
             var now = new Date();
-            var startDateMoment = moment(now.getFullYear() + "-" + $scope.month + "-01").startOf('month').format('YYYY-MM-DD');
+            var startDateMoment = moment($scope.year + "-" + $scope.month + "-01").startOf('month').format('YYYY-MM-DD');
             console.log(startDateMoment);
-            var endDateMoment = moment(now.getFullYear() + "-" + $scope.month + "-01").endOf('month').format('YYYY-MM-DD');
+            var endDateMoment = moment($scope.year + "-" + $scope.month + "-01").endOf('month').format('YYYY-MM-DD');
             console.log(endDateMoment);
 
             var startDate = new Date(startDateMoment).getTime();
