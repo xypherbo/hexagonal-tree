@@ -74,7 +74,7 @@ angular.module("Trello", [
 
             //filter due
             cards.forEach(function(card) {
-                var dueTime = new Date(card.due);
+                var dueTime = new Date(card.due).getTime();
                 if (startDate < dueTime && endDate > dueTime) {
                     inMonthCards.push(card);
                 }
